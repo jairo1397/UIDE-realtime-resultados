@@ -1,0 +1,216 @@
+{
+  "dias": [
+    {
+      "fecha": "2026-06-12",
+      "dia_anterior": {
+        "fecha": "2026-06-11",
+        "partidos": [
+          9,
+          10
+        ]
+      },
+      "plantilla": "/assets/dia1.png"
+    },
+    {
+      "fecha": "2026-06-13",
+      "dia_anterior": {
+        "fecha": "2026-06-12",
+        "partidos": [
+          11,
+          12
+        ]
+      },
+      "plantilla": "/assets/dia2.png"
+    },
+    {
+      "fecha": "2026-06-14",
+      "dia_anterior": {
+        "fecha": "2026-06-13",
+        "partidos": [
+          16,
+          15,
+          13,
+          14
+        ]
+      },
+      "plantilla": "/assets/dia3.png"
+    },
+    {
+      "fecha": "2026-06-15",
+      "dia_anterior": {
+        "fecha": "2026-06-14",
+        "partidos": [
+          18,
+          19,
+          17,
+          20
+        ]
+      },
+      "plantilla": "/assets/dia4.png"
+    },
+    {
+      "fecha": "2026-06-16",
+      "dia_anterior": {
+        "fecha": "2026-06-15",
+        "partidos": [
+          22,
+          24,
+          21,
+          23
+        ]
+      },
+      "plantilla": "/assets/dia5.png"
+    },
+    {
+      "fecha": "2026-06-17",
+      "dia_anterior": {
+        "fecha": "2026-06-16",
+        "partidos": [
+          28,
+          25,
+          26,
+          27,
+          119
+        ]
+      },
+      "plantilla": "/assets/dia6.png"
+    },
+    {
+      "fecha": "2026-06-18",
+      "dia_anterior": {
+        "fecha": "2026-06-17",
+        "partidos": [
+          31,
+          30,
+          29,
+          32
+        ]
+      },
+      "plantilla": "/assets/dia7.png"
+    },
+    {
+      "fecha": "2026-06-19",
+      "dia_anterior": {
+        "fecha": "2026-06-18",
+        "partidos": [
+          33,
+          34,
+          35,
+          36
+        ]
+      },
+      "plantilla": "/assets/dia8.png"
+    },
+    {
+      "fecha": "2026-06-20",
+      "dia_anterior": {
+        "fecha": "2026-06-19",
+        "partidos": [
+          40,
+          38,
+          37,
+          39
+        ]
+      },
+      "plantilla": "/assets/dia9.png"
+    },
+    {
+      "fecha": "2026-06-21",
+      "dia_anterior": {
+        "fecha": "2026-06-20",
+        "partidos": [
+          43,
+          41,
+          42,
+          44
+        ]
+      },
+      "plantilla": "/assets/dia10.png"
+    },
+    {
+      "fecha": "2026-06-22",
+      "dia_anterior": {
+        "fecha": "2026-06-21",
+        "partidos": [
+          46,
+          47,
+          45,
+          48
+        ]
+      },
+      "plantilla": "/assets/dia11.png"
+    },
+    {
+      "fecha": "2026-06-23",
+      "dia_anterior": {
+        "fecha": "2026-06-22",
+        "partidos": [
+          125,
+          51,
+          50,
+          49,
+          52
+        ]
+      },
+      "plantilla": "/assets/dia12.png"
+    },
+    {
+      "fecha": "2026-06-24",
+      "dia_anterior": {
+        "fecha": "2026-06-23",
+        "partidos": [
+          55,
+          53,
+          54,
+          56
+        ]
+      },
+      "plantilla": "/assets/dia13.png"
+    },
+    {
+      "fecha": "2026-06-25",
+      "dia_anterior": {
+        "fecha": "2026-06-24",
+        "partidos": [
+          59,
+          60,
+          57,
+          58,
+          61,
+          62
+        ]
+      },
+      "plantilla": "/assets/dia14.png"
+    },
+    {
+      "fecha": "2026-06-26",
+      "dia_anterior": {
+        "fecha": "2026-06-25",
+        "partidos": [
+          63,
+          64,
+          65,
+          66,
+          67,
+          68
+        ]
+      },
+      "plantilla": "/assets/dia15.png"
+    },
+    {
+      "fecha": "2026-06-27",
+      "dia_anterior": {
+        "fecha": "2026-06-26",
+        "partidos": [
+          69,
+          70,
+          73,
+          74,
+          71,
+          72
+        ]
+      },
+      "plantilla": "/assets/dia16.png"
+    }
+  ]
+}

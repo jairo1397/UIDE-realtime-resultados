@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resumen de Marcadores</title>
+    <style>
+        @font-face {
+            font-family: 'Miedinger';
+            src: url('assets/fonts/Miedinger_-Bold.otf') format('opentype');
+            font-weight: bold;
+            font-style: normal;
+        }
+
+        :root {
+            --primary-bg: rgba(15, 23, 42, 0.85);
+            --card-bg: rgba(30, 41, 59, 0.9);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent: #38bdf8;
+            --score-bg: rgba(0, 0, 0, 0.5);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #0f172a;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+            transition: background-image 0.5s ease-in-out;
+        }
+
+
+
+        .matches-container {
+            position: absolute;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Configuración para 2 partidos (como lo tienes ahora) */
+        .matches-container.count-2 {
+            top: 78px;
+            right: 191px;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        /* Configuración para 4 partidos (puedes ajustar top, right, gap, y layout) */
+        .matches-container.count-4 {
+            top: 33px;
+            right: 189px;
+            flex-direction: column;
+            gap: 6px;
+            /* Ejemplo si quieres 2 columnas en vez de 1: 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            */
+        }
+
+        /* Configuración para 6 partidos */
+        .matches-container.count-6 {
+            top: 21px;
+            right: 190px;
+            flex-direction: column;
+            gap: 0px;
+        }
+
+        .score-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2.5rem;
+        }
+
+        .score {
+            font-family: 'Miedinger', Arial, sans-serif;
+            font-size: 2rem;
+            font-weight: bold;
+            text-align: center;
+            color: #fff;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9);
+        }
+
+        .separator {
+            font-size: 4rem;
+            font-weight: 700;
+            color: #fff;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.9);
+        }
+        
+        .loading {
+            font-size: 1.5rem;
+            color: var(--accent);
+            animation: pulse 1.5s infinite;
+        }
+
+        .error-message {
+            background: rgba(239, 68, 68, 0.2);
+            border: 1px solid rgba(239, 68, 68, 0.5);
+            color: #fca5a5;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 500;
+        }
+
+
+        @keyframes pulse {
+            0% { opacity: 0.6; }
+            50% { opacity: 1; }
+            100% { opacity: 0.6; }
+        }
+
+        #black-screen {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #000;
+            z-index: 9999;
+            transition: opacity 0.5s ease-out;
+        }
+
+
+    </style>
+
+</head>
+<body>
+    <div id="black-screen"></div>
+
+    <div id="loading" class="loading"></div>
+    <div id="error-container"></div>
+    
+    <div class="matches-container" id="matches-container">
+        <!-- Match cards will be generated here -->
+    </div>
+
+    <script>
+        class ResultadosManager {
+            constructor() {
+                this.apiUrl = 'https://alacapipollamundialista.alacoohperu.pe/api/public';
+                this.container = document.getElementById('matches-container');
+                this.loadingEl = document.getElementById('loading');
+                this.errorEl = document.getElementById('error-container');
+            }
+
+            // Get date parameter from URL: ?dia=2026-06-12
+            getUrlDate() {
+                const urlParams = new URLSearchParams(window.location.search);
+                return urlParams.get('dia');
+            }
+
+            formatDate(dateString) {
+                if (!dateString) return '';
+                const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                const date = new Date(dateString + 'T00:00:00'); // Prevent timezone issues
+                return date.toLocaleDateString('es-ES', options).replace(/^\w/, c => c.toUpperCase());
+            }
+
+            showError(message) {
+                this.loadingEl.style.display = 'none';
+                this.errorEl.innerHTML = `<div class="error-message">${message}</div>`;
+                this.hideBlackScreen();
+            }
+
+            hideBlackScreen() {
+                const screen = document.getElementById('black-screen');
+                if (screen) {
+                    screen.style.opacity = '0';
+                    setTimeout(() => screen.remove(), 500);
+                }
+            }
+
+            async init() {
+                const targetDate = this.getUrlDate();
+                
+                if (!targetDate) {
+                    this.showError('No se especificó un día en la URL. Ejemplo: ?dia=2026-06-12');
+                    return;
+                }
+
+                try {
+                    // 1. Fetch JSON config
+                    const jsonRes = await fetch('partidos.json');
+                    if (!jsonRes.ok) throw new Error('No se pudo cargar el archivo partidos.json');
+                    
+                    const data = await jsonRes.json();
+                    
+                    // 2. Find the current day in the config
+                    const dayConfig = data.dias.find(d => d.fecha === targetDate);
+                    
+                    if (!dayConfig) {
+                        this.showError(`No se encontró configuración para el día: ${targetDate}`);
+                        return;
+                    }
+
+                    // 3. Set Background Template
+                    let imagePromise = Promise.resolve();
+                    if (dayConfig.plantilla) {
+                        document.body.style.backgroundImage = `url('${dayConfig.plantilla}')`;
+                        imagePromise = new Promise((resolve) => {
+                            const img = new Image();
+                            img.src = dayConfig.plantilla;
+                            img.onload = resolve;
+                            img.onerror = resolve; // Continue even if image fails to load
+                        });
+                    }
+
+                    // 4. Check if there are previous day matches
+                    if (!dayConfig.dia_anterior || !dayConfig.dia_anterior.partidos || dayConfig.dia_anterior.partidos.length === 0) {
+                        this.loadingEl.style.display = 'none';
+                        this.container.innerHTML = `<div style="text-align:center; grid-column: 1/-1; color: var(--text-muted);">No hay partidos registrados del día anterior.</div>`;
+                        await imagePromise;
+                        this.hideBlackScreen();
+                        return;
+                    }
+
+                    // 5. Fetch all matches from API
+                    await this.fetchAndRenderMatches(dayConfig.dia_anterior.partidos, imagePromise);
+
+                } catch (err) {
+                    console.error(err);
+                    this.showError('Hubo un error al procesar la información: ' + err.message);
+                }
+            }
+
+            async fetchAndRenderMatches(partidoIds, imagePromise) {
+                try {
+                    // Fetch all at once in parallel
+                    const matchPromises = partidoIds.map(id => 
+                        fetch(`${this.apiUrl}/partidos?id=${id}`, { cache: "no-store" })
+                            .then(res => {
+                                if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+                                return res.json();
+                            })
+                    );
+
+                    // Wait for both matches AND the background image
+                    const [matchesData] = await Promise.all([
+                        Promise.all(matchPromises),
+                        imagePromise
+                    ]);
+                    
+                    this.loadingEl.style.display = 'none';
+                    this.renderMatches(matchesData);
+                    this.hideBlackScreen();
+
+                } catch (err) {
+                    console.error(err);
+                    this.showError('Error al cargar los datos del API: ' + err.message);
+                }
+            }
+
+            renderMatches(matchesData) {
+                // Determine valid matches
+                const validMatches = matchesData.filter(matchResp => (matchResp.partidos && matchResp.partidos.length > 0));
+                
+                this.container.innerHTML = ''; // Clear container
+                this.container.className = `matches-container count-${validMatches.length}`;
+
+                validMatches.forEach(matchResp => {
+                    // Extract the match from the 'partidos' array
+                    const match = matchResp.partidos[0]; 
+
+                    
+                    // Fallback to empty score properties if not available
+                    const homeScore = match.marcador && match.marcador.local != null ? match.marcador.local : '0';
+                    const awayScore = match.marcador && match.marcador.visitante != null ? match.marcador.visitante : '0';
+
+                    const card = document.createElement('div');
+                    card.className = 'score-container';
+                    card.innerHTML = `
+                        <div class="score">${homeScore}</div>
+                        <div class="score">${awayScore}</div>
+                    `;
+                    
+                    this.container.appendChild(card);
+                });
+            }
+        }
+
+        // Initialize when DOM is ready
+        document.addEventListener('DOMContentLoaded', () => {
+            const manager = new ResultadosManager();
+            manager.init();
+        });
+    </script>
+</body>
+</html>
