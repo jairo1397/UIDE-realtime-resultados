@@ -9,7 +9,7 @@
           10
         ]
       },
-      "plantilla": "/assets/dia1.png"
+      "plantilla": "assets/dia1.png"
     },
     {
       "fecha": "2026-06-13",
@@ -20,7 +20,7 @@
           12
         ]
       },
-      "plantilla": "/assets/dia2.png"
+      "plantilla": "assets/dia2.png"
     },
     {
       "fecha": "2026-06-14",
@@ -33,7 +33,7 @@
           14
         ]
       },
-      "plantilla": "/assets/dia3.png"
+      "plantilla": "assets/dia3.png"
     },
     {
       "fecha": "2026-06-15",
@@ -46,7 +46,7 @@
           20
         ]
       },
-      "plantilla": "/assets/dia4.png"
+      "plantilla": "assets/dia4.png"
     },
     {
       "fecha": "2026-06-16",
@@ -59,7 +59,7 @@
           23
         ]
       },
-      "plantilla": "/assets/dia5.png"
+      "plantilla": "assets/dia5.png"
     },
     {
       "fecha": "2026-06-17",
@@ -73,7 +73,7 @@
           119
         ]
       },
-      "plantilla": "/assets/dia6.png"
+      "plantilla": "assets/dia6.png"
     },
     {
       "fecha": "2026-06-18",
@@ -86,7 +86,7 @@
           32
         ]
       },
-      "plantilla": "/assets/dia7.png"
+      "plantilla": "assets/dia7.png"
     },
     {
       "fecha": "2026-06-19",
@@ -99,7 +99,7 @@
           36
         ]
       },
-      "plantilla": "/assets/dia8.png"
+      "plantilla": "assets/dia8.png"
     },
     {
       "fecha": "2026-06-20",
@@ -112,7 +112,7 @@
           39
         ]
       },
-      "plantilla": "/assets/dia9.png"
+      "plantilla": "assets/dia9.png"
     },
     {
       "fecha": "2026-06-21",
@@ -125,7 +125,7 @@
           44
         ]
       },
-      "plantilla": "/assets/dia10.png"
+      "plantilla": "assets/dia10.png"
     },
     {
       "fecha": "2026-06-22",
@@ -138,7 +138,7 @@
           48
         ]
       },
-      "plantilla": "/assets/dia11.png"
+      "plantilla": "assets/dia11.png"
     },
     {
       "fecha": "2026-06-23",
@@ -152,7 +152,7 @@
           52
         ]
       },
-      "plantilla": "/assets/dia12.png"
+      "plantilla": "assets/dia12.png"
     },
     {
       "fecha": "2026-06-24",
@@ -165,7 +165,7 @@
           56
         ]
       },
-      "plantilla": "/assets/dia13.png"
+      "plantilla": "assets/dia13.png"
     },
     {
       "fecha": "2026-06-25",
@@ -180,7 +180,7 @@
           62
         ]
       },
-      "plantilla": "/assets/dia14.png"
+      "plantilla": "assets/dia14.png"
     },
     {
       "fecha": "2026-06-26",
@@ -195,7 +195,7 @@
           68
         ]
       },
-      "plantilla": "/assets/dia15.png"
+      "plantilla": "assets/dia15.png"
     },
     {
       "fecha": "2026-06-27",
@@ -210,7 +210,7 @@
           72
         ]
       },
-      "plantilla": "/assets/dia16.png"
+      "plantilla": "assets/dia16.png"
     }
   ]
 }
