@@ -29,24 +29,17 @@
         }
 
         body {
-            background-color: transparent;
-            margin: 0; 
-            padding: 0; 
-            overflow: hidden;
-            height: 100vh; 
-            width: 100vw;
-        }
-
-        #app-container {
-            width: 1920px;
-            height: 1080px;
-            position: absolute;
-            top: 50%;
-            left: 50%;
+            background-color: #0f172a;
             background-size: cover;
             background-position: center;
+            background-attachment: fixed;
             background-repeat: no-repeat;
-            transform-origin: center center;
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
             transition: background-image 0.5s ease-in-out;
         }
 
@@ -147,13 +140,11 @@
 <body>
     <div id="black-screen"></div>
 
-    <div id="app-container">
-        <div id="loading" class="loading"></div>
-        <div id="error-container"></div>
-        
-        <div class="matches-container" id="matches-container">
-            <!-- Match cards will be generated here -->
-        </div>
+    <div id="loading" class="loading"></div>
+    <div id="error-container"></div>
+    
+    <div class="matches-container" id="matches-container">
+        <!-- Match cards will be generated here -->
     </div>
 
     <script>
@@ -218,7 +209,7 @@
                     // 3. Set Background Template
                     let imagePromise = Promise.resolve();
                     if (dayConfig.plantilla) {
-                        document.getElementById('app-container').style.backgroundImage = `url('${dayConfig.plantilla}')`;
+                        document.body.style.backgroundImage = `url('${dayConfig.plantilla}')`;
                         imagePromise = new Promise((resolve) => {
                             const img = new Image();
                             img.src = dayConfig.plantilla;
@@ -299,14 +290,6 @@
                 });
             }
         }
-
-        // Auto-scale to fit window
-        function resizeApp() {
-            const scale = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
-            document.getElementById('app-container').style.transform = `translate(-50%, -50%) scale(${scale})`;
-        }
-        window.addEventListener('resize', resizeApp);
-        resizeApp();
 
         // Initialize when DOM is ready
         document.addEventListener('DOMContentLoaded', () => {
