@@ -53,46 +53,51 @@
 
         /* Configuración para 2 partidos (como lo tienes ahora) */
         .matches-container.count-2 {
-    top: 77px;
-    right: 184px;
-    flex-direction: column;
-    gap: 8px;
+            top: 77px;
+            right: 184px;
+            flex-direction: column;
+            gap: 8px;
         }
 
         /* Configuración para 4 partidos (puedes ajustar top, right, gap, y layout) */
         .matches-container.count-4 {
-    top: 44px;
-    right: 241px;
-    flex-direction: column;
-    gap: 8px;
-            /* Ejemplo si quieres 2 columnas en vez de 1: 
-            display: grid; 
-            grid-template-columns: 1fr 1fr; 
-            */
+            top: 33px;
+            right: 183px;
+            flex-direction: column;
+            gap: 0px;
         }
 
         /* Configuración para 6 partidos */
         .matches-container.count-6 {
-    top: 26px;
-    right: 241px;
-    flex-direction: column;
-    gap: 1px;
+            top: 21px;
+            right: 186px;
+            flex-direction: column;
+            gap: 0x;
         }
 
         .score-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 3rem;
+        }
+
+        .matches-container.count-6 .score-container .score {
+            font-family: 'Miedinger', Arial, sans-serif;
+            font-size: 2rem;
+            font-weight: bold;
+            text-align: center;
+            color: #fff;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9);
         }
 
         .score {
-    font-family: 'Miedinger', Arial, sans-serif;
-    font-size: 2.3rem;
-    font-weight: bold;
-    text-align: center;
-    color: #fff;
-    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9);
+            font-family: 'Miedinger', Arial, sans-serif;
+            font-size: 2.3rem;
+            font-weight: bold;
+            text-align: center;
+            color: #fff;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9);
         }
 
         
