@@ -33,9 +33,6 @@
             margin: 0; 
             padding: 0; 
             overflow: hidden;
-            display: flex; 
-            align-items: center; 
-            justify-content: center;
             height: 100vh; 
             width: 100vw;
         }
@@ -43,7 +40,9 @@
         #app-container {
             width: 1920px;
             height: 1080px;
-            position: relative;
+            position: absolute;
+            top: 50%;
+            left: 50%;
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -304,7 +303,7 @@
         // Auto-scale to fit window
         function resizeApp() {
             const scale = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
-            document.getElementById('app-container').style.transform = `scale(${scale})`;
+            document.getElementById('app-container').style.transform = `translate(-50%, -50%) scale(${scale})`;
         }
         window.addEventListener('resize', resizeApp);
         resizeApp();
