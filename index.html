@@ -62,10 +62,10 @@
 
         /* Configuración para 4 partidos (puedes ajustar top, right, gap, y layout) */
         .matches-container.count-4 {
-            top: 33px;
-            right: 183px;
+            top: 27px;
+            right: 166px;
             flex-direction: column;
-            gap: 0px;
+            gap: 2px;
         }
 
         /* Configuración para 6 partidos */
@@ -81,6 +81,15 @@
             align-items: center;
             justify-content: center;
             gap: 3rem;
+        }
+
+        .matches-container.count-4 .score-container .score {
+            font-family: 'Miedinger', Arial, sans-serif;
+            font-size: 2rem;
+            font-weight: bold;
+            text-align: center;
+            color: #fff;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9);
         }
 
         .matches-container.count-6 .score-container .score {
@@ -189,6 +198,38 @@
                 right: 248px;
                 flex-direction: column;
                 gap: 8px;
+            }
+
+            .matches-container.count-4 {
+                top: 418px;
+                right: 230px;
+                flex-direction: column;
+                gap: 2px;
+            }
+
+            .matches-container.count-6 {
+                top: 344px;
+                right: 221px;
+                flex-direction: column;
+                gap: 1px;
+            }
+
+            .matches-container.count-4 .score-container .score {
+                font-family: 'Miedinger', Arial, sans-serif;
+                font-size: 2rem;
+                font-weight: bold;
+                text-align: center;
+                color: #fff;
+                text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9);
+            }
+
+            .matches-container.count-6 .score-container .score {
+                font-family: 'Miedinger', Arial, sans-serif;
+                font-size: 2rem;
+                font-weight: bold;
+                text-align: center;
+                color: #fff;
+                text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9);
             }
 
             .score {
