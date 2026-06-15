@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resumen de Marcadores</title>
+    <link rel="preload" href="assets/fonts/Miedinger_-Bold.otf" as="font" crossorigin>
     <style>
         @font-face {
             font-family: 'Miedinger';
@@ -132,6 +133,73 @@
             transition: opacity 0.5s ease-out;
         }
 
+        /* Configuración específica para pantallas de 1920x768 */
+        @media (width: 1920px) and (height: 768px) {
+            .matches-container.count-2 {
+                top: 188px;
+                right: 478px;
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .score-container {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 6rem;
+            }
+
+            .score {
+                font-family: 'Miedinger', Arial, sans-serif;
+                font-size: 5.5rem;
+                font-weight: bold;
+                text-align: center;
+                color: #fff;
+                text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9);
+            }
+
+            .matches-container.count-4 {
+                top: 65px;
+                right: 472px;
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .matches-container.count-6 {
+                top: 35px;
+                right: 478px;
+                flex-direction: column;
+                gap: 1px;
+            }
+
+            .matches-container.count-6 .score-container .score {
+                font-family: 'Miedinger', Arial, sans-serif;
+                font-size: 5rem;
+                font-weight: bold;
+                text-align: center;
+                color: #fff;
+                text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9);
+            }
+        }
+
+        /* Configuración específica para pantallas de 600x810 (Vertical) */
+        @media (width: 600px) and (height: 810px) {
+            .matches-container.count-2 {
+                top: 492px;
+                right: 248px;
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .score {
+                font-family: 'Miedinger', Arial, sans-serif;
+                font-size: 3rem;
+                font-weight: bold;
+                text-align: center;
+                color: #fff;
+                text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9);
+            }
+        }
 
     </style>
 
@@ -207,11 +275,16 @@
 
                     // 3. Set Background Template
                     let imagePromise = Promise.resolve();
-                    if (dayConfig.plantilla) {
-                        document.body.style.backgroundImage = `url('${dayConfig.plantilla}')`;
+                    
+                    // Detectar si la resolución es 600x810 para usar la plantilla vertical
+                    const isVertical = window.innerWidth === 600 && window.innerHeight === 810;
+                    const backgroundUrl = (isVertical && dayConfig.plantilla_v) ? dayConfig.plantilla_v : dayConfig.plantilla;
+
+                    if (backgroundUrl) {
+                        document.body.style.backgroundImage = `url('${backgroundUrl}')`;
                         imagePromise = new Promise((resolve) => {
                             const img = new Image();
-                            img.src = dayConfig.plantilla;
+                            img.src = backgroundUrl;
                             img.onload = resolve;
                             img.onerror = resolve; // Continue even if image fails to load
                         });
@@ -246,10 +319,13 @@
                             })
                     );
 
-                    // Wait for both matches AND the background image
+                    // Wait for matches, background image AND the custom font to be ready
+                    const fontPromise = document.fonts ? document.fonts.load('bold 1rem "Miedinger"') : Promise.resolve();
+                    
                     const [matchesData] = await Promise.all([
                         Promise.all(matchPromises),
-                        imagePromise
+                        imagePromise,
+                        fontPromise
                     ]);
                     
                     this.loadingEl.style.display = 'none';
