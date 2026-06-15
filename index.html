@@ -182,8 +182,8 @@
             }
         }
 
-        /* Configuración específica para pantallas de 600x810 (Vertical) */
-        @media (width: 600px) and (height: 810px) {
+        /* Configuración específica para pantallas verticales (ej. 600x810) */
+        @media (orientation: portrait) {
             .matches-container.count-2 {
                 top: 492px;
                 right: 248px;
@@ -276,8 +276,8 @@
                     // 3. Set Background Template
                     let imagePromise = Promise.resolve();
                     
-                    // Detectar si la resolución es 600x810 para usar la plantilla vertical
-                    const isVertical = window.innerWidth === 600 && window.innerHeight === 810;
+                    // Detectar si la pantalla es vertical (altura mayor que anchura)
+                    const isVertical = window.innerHeight > window.innerWidth;
                     const backgroundUrl = (isVertical && dayConfig.plantilla_v) ? dayConfig.plantilla_v : dayConfig.plantilla;
 
                     if (backgroundUrl) {
